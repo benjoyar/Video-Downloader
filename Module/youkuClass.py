@@ -45,7 +45,7 @@ class ChaseYouku :
 		return result
 
 	def __getVideoID(self, link):
-		result = re.findall(r"id_(.*?==)", link)
+		result = re.findall(r"id_(.*)\.html", link)
 		if len(result) > 0 :
 			videoID = result[0]
 		else :
@@ -66,7 +66,7 @@ class ChaseYouku :
 			pageBody = False
 
 		return pageBody
-			
+
 	def __getVideoFileUrl (self, videoInfo) :
 		videoInfo = json.JSONDecoder().decode(videoInfo)
 		if 'security' in videoInfo['data']:
@@ -122,7 +122,7 @@ class ChaseYouku :
 		elif videoType == 'mp4hd3':
 			typeName = 'hd3'
 		else :
-			typeName = 'mp4'			
+			typeName = 'mp4'
 
 		result = {
 			'videoType': typeName,
@@ -134,13 +134,13 @@ class ChaseYouku :
 		f = h = 0
 		b = list(range(256))
 		result = ''
- 
+
 		while h < 256:
 			f = (f + b[h] + ord(a[h % len(a)])) % 256
 			b[h], b[f] = b[f], b[h]
 			h += 1
 		q = f = h = 0
- 
+
 		while q < len(c):
 			h = (h + 1) % 256
 			f = (f + b[h]) % 256
